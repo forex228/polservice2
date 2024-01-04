@@ -249,7 +249,7 @@
   left: 0;
   font-family: var(--15-text-reg-font-family);
   font-weight: var(--15-text-reg-font-weight);
-  color: var(--deep-green);
+  color: rgba(252, 49, 49, 1);
   font-size: var(--15-text-reg-font-size);
   letter-spacing: var(--15-text-reg-letter-spacing);
   line-height: var(--15-text-reg-line-height);
