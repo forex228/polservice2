@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./register/globals.css" />
+    <link rel="stylesheet" href="./register/styleguide.css" />
+    <link rel="stylesheet" href="./register/style.css" />
+    <title>PickMeUp</title>
+    <link rel="icon" type="image/x-icon" href="./page/favicon.ico">
+  </head>
+  <body>
+    <div class="sign-up">
+      <div class="overlap-wrapper">
+        <div class="overlap">
+          <div class="group">
+            <div class="inputs">
+              <div class="overlap-group-wrapper">
+                <div class="overlap-group">
+                  <div class="input">
+                    </div>
+                    <input type="password" id="password" class="password-input" placeholder="Введіть пароль">
+                  </div>
+                  <div class="text-wrapper">ПАРОЛЬ</div>
+                </div>
+              </div>
+              <div class="div-wrapper">
+                <div class="overlap-group">
+                  <div class="input">
+                    <input type="text" id="email" class="email-input" placeholder="Введіть електронну пошту">
+                  </div>
+                  <div class="div-2">ЕЛЕКТРОННА ПОШТА</div>
+                </div>
+              </div>
+              <div class="group-2">
+                <div class="overlap-group">
+                  <div class="input">
+                    <input type="text" id="name" class="name-input" placeholder="Введіть ім'я">
+                  </div>
+                  <div class="div">ІМ’Я</div>
+                </div>
+              </div>
+            </div>
+            <div class="text-wrapper-2">РЕЄСТРАЦІЯ</div>
+            <div class="btn-main" id="register-btn">
+              <div class="btn-text-wrapper"><div class="btn-text">Зареєструватися</div></div>
+            </div>
+            <div class="desc">
+              <div class="desc-2">Вже є обліковий запис?</div>
+              <div class="link">
+                <div class="overlap-group-2">
+                  <img class="line" src="./register/img/line.svg" />
+                  <div class="link-2">Увійти</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    document.getElementById("register-btn").addEventListener("click", function() {
+      var password = document.getElementById("password").value;
+      var email = document.getElementById("email").value;
+      var name = document.getElementById("name").value;
+      console.log("Password:", password);
+      console.log("Email:", email);
+      console.log("Name:", name);
+    
+      fetch('https://innabot.pythonanywhere.com/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: password, email: email, name: name }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        if (data.success === true) {
+          // Перевірка, чи сервер повертає "success": true
+          alert("Реєстрація пройшла успішно!");
+          window.location.href = "/login"; // Перенаправлення на сторінку /login
+        } else {
+          alert("Помилка під час реєстрації. Будь ласка, спробуйте знову.");
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert("Помилка під час виконання запиту. Будь ласка, спробуйте знову.");
+      });
+    });
+    </script>
+  </body>
+</html>
